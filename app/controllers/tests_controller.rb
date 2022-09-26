@@ -1,7 +1,8 @@
 class TestsController < Simpler::Controller
 
   def index
-    # render 'tests/list'
+    # render html: 'tests/index'
+    render plain: "Plain text response"
     @tests = Test.all
   end
 

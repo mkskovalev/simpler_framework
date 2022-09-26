@@ -40,7 +40,10 @@ module Simpler
       View.new(@request.env).render(binding)
     end
 
-    def render(template)
+    def render(type_hash)
+      render_type = type_hash.keys[0]
+      template = type_hash.values[0]
+      @request.env['simpler.render_type'] = render_type
       @request.env['simpler.template'] = template
     end
 
