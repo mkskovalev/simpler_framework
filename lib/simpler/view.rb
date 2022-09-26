@@ -13,6 +13,14 @@ module Simpler
       ERB.new(template_by_type).result(binding)
     end
 
+    def render_status
+      @env['simpler.render_status']
+    end
+
+    def render_headers
+      @env['simpler.render_headers']
+    end
+
     private
 
     def controller
@@ -38,10 +46,10 @@ module Simpler
 
     def template_by_type
       case render_type
-      when :html
-        File.read(template_path)
       when :plain
         template
+      else
+        File.read(template_path)
       end
     end
 
