@@ -17,6 +17,7 @@ module Simpler
     def make_response(action)
       @request.env['simpler.controller'] = self
       @request.env['simpler.action'] = action
+      @request.env['simpler.params'] = @request.params
 
       send(action)
       write_response
@@ -27,6 +28,16 @@ module Simpler
 
     def extract_name
       self.class.name.match('(?<name>.+)Controller')[:name].downcase
+    end
+
+    def write_response
+      body = render_body
+      headers = @view.render_headers
+      status = @view.render_status
+
+      set_status(status)
+      set_headers(headers)
+      @response.write(body)
     end
 
     def set_headers(headers)
@@ -47,16 +58,6 @@ module Simpler
       end
     end
 
-    def write_response
-      body = render_body
-      headers = @view.render_headers
-      status = @view.render_status
-
-      set_status(status)
-      set_headers(headers)
-      @response.write(body)
-    end
-
     def render_body
       @view.render(binding)
     end
@@ -74,9 +75,9 @@ module Simpler
 
     def params
       arr = @request.env['REQUEST_URI'].split('/').reject { |value| value.empty? }
-      if arr[1] != nil
-        id = { id: arr[1].to_i }
-        @request.params.merge!(id)
+      id = arr[1].split('?').first.to_i
+      if id != nil
+        @request.params.merge!({ id: id })
       end
     end
   end
