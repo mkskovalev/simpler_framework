@@ -71,5 +71,13 @@ module Simpler
       @request.env['simpler.render_status'] = status
       @request.env['simpler.render_headers'] = headers
     end
+
+    def params
+      arr = @request.env['REQUEST_URI'].split('/').reject { |value| value.empty? }
+      if arr[1] != nil
+        id = { id: arr[1].to_i }
+        @request.params.merge!(id)
+      end
+    end
   end
 end
