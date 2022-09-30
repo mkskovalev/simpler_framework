@@ -12,9 +12,19 @@ module Simpler
       end
 
       def match?(method, path)
-        @method == method && path.match(@path)
+        if @action == 'show'
+          @method == method && @path == path_with_id(path)
+        else
+          @method == method && @path == path
+        end
       end
 
+      private
+
+      def path_with_id(path)
+        id = path.split('/').last
+        path.sub! id, ':id'
+      end
     end
   end
 end

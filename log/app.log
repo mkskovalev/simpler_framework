@@ -1,0 +1,9 @@
+# Logfile created on 2022-09-28 22:40:42 +0700 by logger.rb/v1.4.3
+I, [2022-09-28T22:40:44.002232 #12759]  INFO -- : Request: GET /tests/101?name=max
+I, [2022-09-28T22:40:44.006930 #12759]  INFO -- : Handler: TestsController#show
+I, [2022-09-28T22:40:44.006973 #12759]  INFO -- : Parameters: {"name"=>"max", :id=>101}
+I, [2022-09-28T22:40:44.006995 #12759]  INFO -- : Response: 200 [text/html] tests/show.html.erb
+I, [2022-09-28T22:40:49.935606 #12759]  INFO -- : Request: GET /tests
+I, [2022-09-28T22:40:49.936863 #12759]  INFO -- : Handler: TestsController#index
+I, [2022-09-28T22:40:49.936906 #12759]  INFO -- : Parameters: {}
+I, [2022-09-28T22:40:49.936929 #12759]  INFO -- : Response: 200 [text/html] tests/index.html.erb
